@@ -22,7 +22,7 @@ void uart0_init(unsigned int ubrr){
 	
 	// setting UCRSRn (USART Control and Status Register) (for A, B and C)
 	UCSR0A=(1<<U2X0); // Full duplex // enable full duplex (aka. double speed?) (A register)
-	UCSR0B|=(1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0);// enable receive + enable transmit + enable receive complete interrupt (B-register)
+	UCSR0B|=(1<<RXEN0)|(1<<TXEN0);// enable receive + enable transmit + enable receive complete interrupt (B-register)
 	
 	// UCSZn sættes til 011. UCSZ02 er allerede 0, så derfor sættes UCSZ00 og UCSZ01.
 	UCSR0C|=(1<<UCSZ00)|(1<<UCSZ01); // set frame format (C-register) (8 bits, no parity, 1 start bit, 1 stop bit)
@@ -57,7 +57,7 @@ void putchUSART0(char tx){
 void putsUSART0(char *ptr){
 	
 	while(*ptr){
-		putsUSART0(*ptr);
+		putchUSART0(*ptr);
 		ptr++;
 	}
 	
@@ -68,26 +68,24 @@ char getsUSART0(char *p, int max){
 	
 	char cx;
 	char i = 0;
-	char BS = 0x08;
-	char space = 0x20;
 	
 	// i<max Prevent buffer overrun
 	while(((cx = getchUSART0()) != 0x0D) && i<max){
-		
+		putchUSART0(cx);
 		*p=cx;
 		
-		if(cx==BS){
-			putchUSART0(space);
-			putchUSART0(BS);
-			p--;
-		}else{
-			p++;
-			i++;
-		}
+		p++;
+		i++;
 		
+		if (i==max)
+		{
+			return i;	
+		}else {
+			return 0;
+		}
 	}
 	
 	*p=0;
-	return i;
+	return 0;
 	
 }

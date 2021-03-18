@@ -35,8 +35,7 @@ volatile char flag_r = 0;
 int main(void)
 {  
 	
-//   _i2c_address = 0X78; // write address for i2c interface
-//   
+  
 //   I2C_Init();  //initialize i2c interface to display
 //   InitializeDisplay(); //initialize  display
 //   
@@ -62,16 +61,17 @@ int main(void)
 	 //sendStrXY(var,0,0);
 	 
 	 // OLD
-	 //putchUSART0(getchUSART0());
+	 putchUSART0(getchUSART0());
 	 //_delay_ms(1000);
 	 
 	 
 	 // NEW
-	 i = getsUSART0(buffer, 7);
-	 if(i==7)
-	 putsUSART0(buffer); 
+	// i = getsUSART0(buffer, 8);
+	 //if(i==8)
+	 //putsUSART0(buffer); 
 	 //retransmit buffer
-	 	 
+	 //hh:mm:ss
+		  
 	 // NEW NEW
 // 	 if (flag_r==1)
 // 	 {
