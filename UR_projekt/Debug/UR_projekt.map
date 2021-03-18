@@ -50,7 +50,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 main.o
  .data          0x0000000000000000        0x0 main.o
  .bss           0x0000000000000000        0x0 main.o
- .text.init     0x0000000000000000        0x2 main.o
+ .bss.flag_r    0x0000000000000000        0x1 main.o
+ .bss.data      0x0000000000000000        0x1 main.o
  COMMON         0x0000000000000000        0x0 main.o
  .text          0x0000000000000000        0x0 ssd1306.o
  .data          0x0000000000000000        0x0 ssd1306.o
@@ -127,10 +128,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 UART/UART_MODULE.o
  .data          0x0000000000000000        0x0 UART/UART_MODULE.o
  .bss           0x0000000000000000        0x0 UART/UART_MODULE.o
- .text.putsUSART0
-                0x0000000000000000       0x1a UART/UART_MODULE.o
- .text.getsUSART0
-                0x0000000000000000        0x2 UART/UART_MODULE.o
  .text          0x0000000000000000        0x0 c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr6/memx-const\libgcc.a(_exit.o)
  .data          0x0000000000000000        0x0 c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr6/memx-const\libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr6/memx-const\libgcc.a(_exit.o)
@@ -477,48 +474,49 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000       0x68
+.debug_aranges  0x0000000000000000       0x60
  *(.debug_aranges)
  .debug_aranges
-                0x0000000000000000       0x28 main.o
+                0x0000000000000000       0x20 main.o
  .debug_aranges
-                0x0000000000000028       0x40 UART/UART_MODULE.o
+                0x0000000000000020       0x40 UART/UART_MODULE.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x1251
+.debug_info     0x0000000000000000     0x1313
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
- .debug_info    0x0000000000000bbc      0x34d main.o
- .debug_info    0x0000000000000f09      0x348 UART/UART_MODULE.o
+ .debug_info    0x0000000000000bbc      0x39b main.o
+ .debug_info    0x0000000000000f57      0x3bc UART/UART_MODULE.o
 
-.debug_abbrev   0x0000000000000000      0xca5
+.debug_abbrev   0x0000000000000000      0xce4
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
  .debug_abbrev  0x0000000000000b1a       0xcb main.o
- .debug_abbrev  0x0000000000000be5       0xc0 UART/UART_MODULE.o
+ .debug_abbrev  0x0000000000000be5       0xff UART/UART_MODULE.o
 
-.debug_line     0x0000000000000000      0x406
+.debug_line     0x0000000000000000      0x441
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x1fd C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
- .debug_line    0x00000000000001fd       0xcb main.o
- .debug_line    0x00000000000002c8      0x13e UART/UART_MODULE.o
+ .debug_line    0x00000000000001fd       0xc9 main.o
+ .debug_line    0x00000000000002c6      0x17b UART/UART_MODULE.o
 
-.debug_frame    0x0000000000000000       0xa4
+.debug_frame    0x0000000000000000       0xc0
  *(.debug_frame)
  .debug_frame   0x0000000000000000       0x34 main.o
- .debug_frame   0x0000000000000034       0x70 UART/UART_MODULE.o
+ .debug_frame   0x0000000000000034       0x8c UART/UART_MODULE.o
 
-.debug_str      0x0000000000000000      0x415
+.debug_str      0x0000000000000000      0x407
  *(.debug_str)
  .debug_str     0x0000000000000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
- .debug_str     0x00000000000003e6       0x23 main.o
- .debug_str     0x0000000000000409        0xc UART/UART_MODULE.o
+ .debug_str     0x00000000000003e6       0x21 main.o
+ .debug_str     0x0000000000000407        0x0 UART/UART_MODULE.o
 
-.debug_loc      0x0000000000000000       0x57
+.debug_loc      0x0000000000000000      0x1d5
  *(.debug_loc)
- .debug_loc     0x0000000000000000       0x57 UART/UART_MODULE.o
+ .debug_loc     0x0000000000000000       0x6b main.o
+ .debug_loc     0x000000000000006b      0x16a UART/UART_MODULE.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -538,10 +536,10 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000       0x48
+.debug_ranges   0x0000000000000000       0x40
  *(.debug_ranges)
- .debug_ranges  0x0000000000000000       0x18 main.o
- .debug_ranges  0x0000000000000018       0x30 UART/UART_MODULE.o
+ .debug_ranges  0x0000000000000000       0x10 main.o
+ .debug_ranges  0x0000000000000010       0x30 UART/UART_MODULE.o
 
 .debug_macro
  *(.debug_macro)
@@ -554,84 +552,96 @@ LOAD data_init
  .note.gnu.avr.deviceinfo
                 0x0000000000000000       0x40 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
 
-.text.uart0_init
-                0x0000000000000140       0x24
- .text.uart0_init
-                0x0000000000000140       0x24 UART/UART_MODULE.o
-                0x0000000000000140                uart0_init
+.text.getsUSART0
+                0x0000000000000140       0x4e
+ .text.getsUSART0
+                0x0000000000000140       0x4e UART/UART_MODULE.o
+                0x0000000000000140                getsUSART0
 
-.text.main      0x0000000000000164       0x14
- .text.main     0x0000000000000164       0x14 main.o
-                0x0000000000000164                main
+.text.main      0x000000000000018e       0x44
+ .text.main     0x000000000000018e       0x44 main.o
+                0x000000000000018e                main
+
+.text.uart0_init
+                0x00000000000001d2       0x24
+ .text.uart0_init
+                0x00000000000001d2       0x24 UART/UART_MODULE.o
+                0x00000000000001d2                uart0_init
+
+.text.putsUSART0
+                0x00000000000001f6       0x1c
+ .text.putsUSART0
+                0x00000000000001f6       0x1c UART/UART_MODULE.o
+                0x00000000000001f6                putsUSART0
 
 .text.putchUSART0
-                0x0000000000000178        0xe
+                0x0000000000000212        0xe
  .text.putchUSART0
-                0x0000000000000178        0xe UART/UART_MODULE.o
-                0x0000000000000178                putchUSART0
+                0x0000000000000212        0xe UART/UART_MODULE.o
+                0x0000000000000212                putchUSART0
 
 .text.getchUSART0
-                0x0000000000000186        0xe
+                0x0000000000000220        0xe
  .text.getchUSART0
-                0x0000000000000186        0xe UART/UART_MODULE.o
-                0x0000000000000186                getchUSART0
+                0x0000000000000220        0xe UART/UART_MODULE.o
+                0x0000000000000220                getchUSART0
 
-.text           0x0000000000000194        0x4
- .text          0x0000000000000194        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
-                0x0000000000000194                __vector_38
-                0x0000000000000194                __vector_22
-                0x0000000000000194                __vector_28
-                0x0000000000000194                __vector_1
-                0x0000000000000194                __vector_32
-                0x0000000000000194                __vector_34
-                0x0000000000000194                __vector_24
-                0x0000000000000194                __vector_12
-                0x0000000000000194                __vector_55
-                0x0000000000000194                __vector_46
-                0x0000000000000194                __bad_interrupt
-                0x0000000000000194                __vector_6
-                0x0000000000000194                __vector_31
-                0x0000000000000194                __vector_35
-                0x0000000000000194                __vector_39
-                0x0000000000000194                __vector_3
-                0x0000000000000194                __vector_23
-                0x0000000000000194                __vector_30
-                0x0000000000000194                __vector_45
-                0x0000000000000194                __vector_25
-                0x0000000000000194                __vector_11
-                0x0000000000000194                __vector_54
-                0x0000000000000194                __vector_13
-                0x0000000000000194                __vector_17
-                0x0000000000000194                __vector_19
-                0x0000000000000194                __vector_56
-                0x0000000000000194                __vector_7
-                0x0000000000000194                __vector_49
-                0x0000000000000194                __vector_41
-                0x0000000000000194                __vector_43
-                0x0000000000000194                __vector_27
-                0x0000000000000194                __vector_5
-                0x0000000000000194                __vector_33
-                0x0000000000000194                __vector_47
-                0x0000000000000194                __vector_52
-                0x0000000000000194                __vector_37
-                0x0000000000000194                __vector_4
-                0x0000000000000194                __vector_44
-                0x0000000000000194                __vector_51
-                0x0000000000000194                __vector_9
-                0x0000000000000194                __vector_2
-                0x0000000000000194                __vector_21
-                0x0000000000000194                __vector_15
-                0x0000000000000194                __vector_36
-                0x0000000000000194                __vector_29
-                0x0000000000000194                __vector_40
-                0x0000000000000194                __vector_8
-                0x0000000000000194                __vector_26
-                0x0000000000000194                __vector_48
-                0x0000000000000194                __vector_14
-                0x0000000000000194                __vector_53
-                0x0000000000000194                __vector_10
-                0x0000000000000194                __vector_50
-                0x0000000000000194                __vector_16
-                0x0000000000000194                __vector_18
-                0x0000000000000194                __vector_20
-                0x0000000000000194                __vector_42
+.text           0x000000000000022e        0x4
+ .text          0x000000000000022e        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
+                0x000000000000022e                __vector_38
+                0x000000000000022e                __vector_22
+                0x000000000000022e                __vector_28
+                0x000000000000022e                __vector_1
+                0x000000000000022e                __vector_32
+                0x000000000000022e                __vector_34
+                0x000000000000022e                __vector_24
+                0x000000000000022e                __vector_12
+                0x000000000000022e                __vector_55
+                0x000000000000022e                __vector_46
+                0x000000000000022e                __bad_interrupt
+                0x000000000000022e                __vector_6
+                0x000000000000022e                __vector_31
+                0x000000000000022e                __vector_35
+                0x000000000000022e                __vector_39
+                0x000000000000022e                __vector_3
+                0x000000000000022e                __vector_23
+                0x000000000000022e                __vector_30
+                0x000000000000022e                __vector_45
+                0x000000000000022e                __vector_25
+                0x000000000000022e                __vector_11
+                0x000000000000022e                __vector_54
+                0x000000000000022e                __vector_13
+                0x000000000000022e                __vector_17
+                0x000000000000022e                __vector_19
+                0x000000000000022e                __vector_56
+                0x000000000000022e                __vector_7
+                0x000000000000022e                __vector_49
+                0x000000000000022e                __vector_41
+                0x000000000000022e                __vector_43
+                0x000000000000022e                __vector_27
+                0x000000000000022e                __vector_5
+                0x000000000000022e                __vector_33
+                0x000000000000022e                __vector_47
+                0x000000000000022e                __vector_52
+                0x000000000000022e                __vector_37
+                0x000000000000022e                __vector_4
+                0x000000000000022e                __vector_44
+                0x000000000000022e                __vector_51
+                0x000000000000022e                __vector_9
+                0x000000000000022e                __vector_2
+                0x000000000000022e                __vector_21
+                0x000000000000022e                __vector_15
+                0x000000000000022e                __vector_36
+                0x000000000000022e                __vector_29
+                0x000000000000022e                __vector_40
+                0x000000000000022e                __vector_8
+                0x000000000000022e                __vector_26
+                0x000000000000022e                __vector_48
+                0x000000000000022e                __vector_14
+                0x000000000000022e                __vector_53
+                0x000000000000022e                __vector_10
+                0x000000000000022e                __vector_50
+                0x000000000000022e                __vector_16
+                0x000000000000022e                __vector_18
+                0x000000000000022e                __vector_20
+                0x000000000000022e                __vector_42

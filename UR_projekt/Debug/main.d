@@ -22,6 +22,7 @@ main.d main.o: .././main.c \
  c:\program\ files\microchip\xc8\v2.31\avr\avr\include\math.h \
  .././ssd1306.h \
  c:\program\ files\microchip\xc8\v2.31\avr\lib\gcc\avr\5.4.0\include\stdbool.h \
+ c:\program\ files\microchip\xc8\v2.31\avr\avr\include\avr\interrupt.h \
  .././UART/UART_MODULE.h
 
 c:\program\ files\microchip\xc8\v2.31\avr\lib\gcc\avr\5.4.0\include\xc.h:
@@ -69,5 +70,7 @@ c:\program\ files\microchip\xc8\v2.31\avr\avr\include\math.h:
 .././ssd1306.h:
 
 c:\program\ files\microchip\xc8\v2.31\avr\lib\gcc\avr\5.4.0\include\stdbool.h:
+
+c:\program\ files\microchip\xc8\v2.31\avr\avr\include\avr\interrupt.h:
 
 .././UART/UART_MODULE.h:

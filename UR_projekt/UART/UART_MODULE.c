@@ -22,10 +22,10 @@ void uart0_init(unsigned int ubrr){
 	
 	// setting UCRSRn (USART Control and Status Register) (for A, B and C)
 	UCSR0A=(1<<U2X0); // Full duplex // enable full duplex (aka. double speed?) (A register)
-	UCSR0B|=(1<<RXEN0)|(1<<TXEN0);// enable receive and transmit (B-register)
+	UCSR0B|=(1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0);// enable receive + enable transmit + enable receive complete interrupt (B-register)
 	
 	// UCSZn sættes til 011. UCSZ02 er allerede 0, så derfor sættes UCSZ00 og UCSZ01.
-	UCSR0C|=(1<<UCSZ00)|(1<<UCSZ01); // set frame format (C-register) (8 bits, no parity...vidst også med 1 start bit og 1 stop bit)
+	UCSR0C|=(1<<UCSZ00)|(1<<UCSZ01); // set frame format (C-register) (8 bits, no parity, 1 start bit, 1 stop bit)
 	
 	// setting UBRRn (USART Baud Rate Register) (16 bits where H is 8 bit high and L is 8 bit low) (skal beregnes: se tabel i datablad)
 	// datablad: s.207
@@ -53,17 +53,41 @@ void putchUSART0(char tx){
 	UART STRINGS
 **/
 
-// transmit one string (by calling putscUSART0 continuously until whole string is sent)
+// transmit one string (by calling putsUSART0 continuously until whole string is sent)
 void putsUSART0(char *ptr){
 	
 	while(*ptr){
-		putscUSART0(*ptr);
+		putsUSART0(*ptr);
 		ptr++;
-	} 
+	}
 	
 }
 
 // receive one string
-char getsUSART0(void){
+char getsUSART0(char *p, int max){
+	
+	char cx;
+	char i = 0;
+	char BS = 0x08;
+	char space = 0x20;
+	
+	// i<max Prevent buffer overrun
+	while(((cx = getchUSART0()) != 0x0D) && i<max){
+		
+		*p=cx;
+		
+		if(cx==BS){
+			putchUSART0(space);
+			putchUSART0(BS);
+			p--;
+		}else{
+			p++;
+			i++;
+		}
+		
+	}
+	
+	*p=0;
+	return i;
 	
 }

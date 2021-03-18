@@ -13,7 +13,7 @@ extern void uart0_init(unsigned int ubrr);
 extern void putscUSART0(char tx);
 extern char getchUSART0(void);
 extern void putsUSART0(char *ptr);
-extern char getsUSART0(void);
+extern char getsUSART0(char *p, int max);
 
 
 #endif /* UART_MODULE_H_ */

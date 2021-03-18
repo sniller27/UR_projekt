@@ -11,32 +11,29 @@
 
 #include "I2C.h"  //include library for i2c driver
 #include "ssd1306.h" //include display driver
+#include <avr/interrupt.h>
 
 #define F_CPU 16000000UL //UL = unsigned long
 #include <util/delay.h>
 #include "UART/UART_MODULE.h"
 
 // For USART
-#define BAUD 19200
+#define BAUD 19200 // could also be written as 103 (according to table s.231 i datablad)
 #define MYUBRRF F_CPU/8/BAUD-1 // full duplex
 #define MYUBRRH F_CPU/16/BAUD-1 // half duplex
 
-// ISR(USART3_RX_vect){
-// 	data = UDR3;
+// Variables for UART receive interrupt
+volatile char data = 0;
+volatile char flag_r = 0;
+
+// receive complete interrupt service routine (UART receive interrupt)
+// ISR(USART0_RX_vect){
+// 	data = UDR0;
 // 	flag_r=1;
 // }
 
-
-//init function
-void init(){
-//	PORTK|=0xFF;
-//	DDRG |=0b00100000;  //D4 as output
-	
-}
-
 int main(void)
 {  
-	//init();
 	
 //   _i2c_address = 0X78; // write address for i2c interface
 //   
@@ -47,16 +44,42 @@ int main(void)
 //    //char text[]="en tekst string"; //string declared before use it in sendStrXY - 15 chars long incl spaces
 //    clear_display();   //use this before writing you own text
    
-   uart0_init(MYUBRRF);
+   uart0_init(MYUBRRF); // UART0 init
+   
+   //initRXCIntr(); // init interrupt RX interrupt (receive interrupt)
+   
+   //sei(); // enable global interrupt (prevents putchUSART0(getchUSART0()); from working)
+   
    
    //char var[4];
+   int i = 0;
+   char buffer[20] = {0};
    
   while (1)
   {  
-	 //putscUSART0('g');
-	 putchUSART0(getchUSART0());
+	 
 	 //sprintf(var,"%c",getchUSART0());
 	 //sendStrXY(var,0,0);
+	 
+	 // OLD
+	 //putchUSART0(getchUSART0());
+	 //_delay_ms(1000);
+	 
+	 
+	 // NEW
+	 i = getsUSART0(buffer, 7);
+	 if(i==7)
+	 putsUSART0(buffer); 
+	 //retransmit buffer
+	 	 
+	 // NEW NEW
+// 	 if (flag_r==1)
+// 	 {
+// 		flag_r = 0;
+// 		putchUSART0(data); // transmit
+// 	 }
+	 
+
 	 
 	
 	 // med string	 
@@ -68,7 +91,7 @@ int main(void)
 	 
 	 
 	 //var = getchUSART0();
-	 //_delay_ms(1000); 
+	 
 	 
 	 //sendCharXY(var,1,2);  //one char  - X is line number - from 0 -7 and Y number position of the char an the line - 15 chars 
 	 
@@ -78,4 +101,3 @@ int main(void)
   
 
 }
-
