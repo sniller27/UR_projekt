@@ -127,6 +127,10 @@ Discarded input sections
  .text          0x0000000000000000        0x0 UART/UART_MODULE.o
  .data          0x0000000000000000        0x0 UART/UART_MODULE.o
  .bss           0x0000000000000000        0x0 UART/UART_MODULE.o
+ .text.putsUSART0
+                0x0000000000000000       0x1a UART/UART_MODULE.o
+ .text.getsUSART0
+                0x0000000000000000        0x2 UART/UART_MODULE.o
  .text          0x0000000000000000        0x0 c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr6/memx-const\libgcc.a(_exit.o)
  .data          0x0000000000000000        0x0 c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr6/memx-const\libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr6/memx-const\libgcc.a(_exit.o)
@@ -473,47 +477,48 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000       0x58
+.debug_aranges  0x0000000000000000       0x68
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x28 main.o
  .debug_aranges
-                0x0000000000000028       0x30 UART/UART_MODULE.o
+                0x0000000000000028       0x40 UART/UART_MODULE.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x11c6
+.debug_info     0x0000000000000000     0x1251
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
- .debug_info    0x0000000000000bbc      0x330 main.o
- .debug_info    0x0000000000000eec      0x2da UART/UART_MODULE.o
+ .debug_info    0x0000000000000bbc      0x34d main.o
+ .debug_info    0x0000000000000f09      0x348 UART/UART_MODULE.o
 
-.debug_abbrev   0x0000000000000000      0xc35
+.debug_abbrev   0x0000000000000000      0xca5
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
- .debug_abbrev  0x0000000000000b1a       0xaa main.o
- .debug_abbrev  0x0000000000000bc4       0x71 UART/UART_MODULE.o
+ .debug_abbrev  0x0000000000000b1a       0xcb main.o
+ .debug_abbrev  0x0000000000000be5       0xc0 UART/UART_MODULE.o
 
-.debug_line     0x0000000000000000      0x3b0
+.debug_line     0x0000000000000000      0x405
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x1fd C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
  .debug_line    0x00000000000001fd       0xcb main.o
- .debug_line    0x00000000000002c8       0xe8 UART/UART_MODULE.o
+ .debug_line    0x00000000000002c8      0x13d UART/UART_MODULE.o
 
-.debug_frame    0x0000000000000000       0x78
+.debug_frame    0x0000000000000000       0xa4
  *(.debug_frame)
  .debug_frame   0x0000000000000000       0x34 main.o
- .debug_frame   0x0000000000000034       0x44 UART/UART_MODULE.o
+ .debug_frame   0x0000000000000034       0x70 UART/UART_MODULE.o
 
-.debug_str      0x0000000000000000      0x409
+.debug_str      0x0000000000000000      0x415
  *(.debug_str)
  .debug_str     0x0000000000000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
  .debug_str     0x00000000000003e6       0x23 main.o
- .debug_str     0x0000000000000409        0x0 UART/UART_MODULE.o
+ .debug_str     0x0000000000000409        0xc UART/UART_MODULE.o
 
-.debug_loc
+.debug_loc      0x0000000000000000       0x57
  *(.debug_loc)
+ .debug_loc     0x0000000000000000       0x57 UART/UART_MODULE.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -533,10 +538,10 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000       0x38
+.debug_ranges   0x0000000000000000       0x48
  *(.debug_ranges)
  .debug_ranges  0x0000000000000000       0x18 main.o
- .debug_ranges  0x0000000000000018       0x20 UART/UART_MODULE.o
+ .debug_ranges  0x0000000000000018       0x30 UART/UART_MODULE.o
 
 .debug_macro
  *(.debug_macro)
@@ -555,78 +560,78 @@ LOAD data_init
                 0x0000000000000140       0x24 UART/UART_MODULE.o
                 0x0000000000000140                uart0_init
 
-.text.main      0x0000000000000164       0x12
- .text.main     0x0000000000000164       0x12 main.o
+.text.main      0x0000000000000164       0x14
+ .text.main     0x0000000000000164       0x14 main.o
                 0x0000000000000164                main
 
-.text.putscUSART0
-                0x0000000000000176        0xe
- .text.putscUSART0
-                0x0000000000000176        0xe UART/UART_MODULE.o
-                0x0000000000000176                putscUSART0
+.text.putchUSART0
+                0x0000000000000178        0xe
+ .text.putchUSART0
+                0x0000000000000178        0xe UART/UART_MODULE.o
+                0x0000000000000178                putchUSART0
 
 .text.getchUSART0
-                0x0000000000000184        0xe
+                0x0000000000000186        0xe
  .text.getchUSART0
-                0x0000000000000184        0xe UART/UART_MODULE.o
-                0x0000000000000184                getchUSART0
+                0x0000000000000186        0xe UART/UART_MODULE.o
+                0x0000000000000186                getchUSART0
 
-.text           0x0000000000000192        0x4
- .text          0x0000000000000192        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
-                0x0000000000000192                __vector_38
-                0x0000000000000192                __vector_22
-                0x0000000000000192                __vector_28
-                0x0000000000000192                __vector_1
-                0x0000000000000192                __vector_32
-                0x0000000000000192                __vector_34
-                0x0000000000000192                __vector_24
-                0x0000000000000192                __vector_12
-                0x0000000000000192                __vector_55
-                0x0000000000000192                __vector_46
-                0x0000000000000192                __bad_interrupt
-                0x0000000000000192                __vector_6
-                0x0000000000000192                __vector_31
-                0x0000000000000192                __vector_35
-                0x0000000000000192                __vector_39
-                0x0000000000000192                __vector_3
-                0x0000000000000192                __vector_23
-                0x0000000000000192                __vector_30
-                0x0000000000000192                __vector_45
-                0x0000000000000192                __vector_25
-                0x0000000000000192                __vector_11
-                0x0000000000000192                __vector_54
-                0x0000000000000192                __vector_13
-                0x0000000000000192                __vector_17
-                0x0000000000000192                __vector_19
-                0x0000000000000192                __vector_56
-                0x0000000000000192                __vector_7
-                0x0000000000000192                __vector_49
-                0x0000000000000192                __vector_41
-                0x0000000000000192                __vector_43
-                0x0000000000000192                __vector_27
-                0x0000000000000192                __vector_5
-                0x0000000000000192                __vector_33
-                0x0000000000000192                __vector_47
-                0x0000000000000192                __vector_52
-                0x0000000000000192                __vector_37
-                0x0000000000000192                __vector_4
-                0x0000000000000192                __vector_44
-                0x0000000000000192                __vector_51
-                0x0000000000000192                __vector_9
-                0x0000000000000192                __vector_2
-                0x0000000000000192                __vector_21
-                0x0000000000000192                __vector_15
-                0x0000000000000192                __vector_36
-                0x0000000000000192                __vector_29
-                0x0000000000000192                __vector_40
-                0x0000000000000192                __vector_8
-                0x0000000000000192                __vector_26
-                0x0000000000000192                __vector_48
-                0x0000000000000192                __vector_14
-                0x0000000000000192                __vector_53
-                0x0000000000000192                __vector_10
-                0x0000000000000192                __vector_50
-                0x0000000000000192                __vector_16
-                0x0000000000000192                __vector_18
-                0x0000000000000192                __vector_20
-                0x0000000000000192                __vector_42
+.text           0x0000000000000194        0x4
+ .text          0x0000000000000194        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
+                0x0000000000000194                __vector_38
+                0x0000000000000194                __vector_22
+                0x0000000000000194                __vector_28
+                0x0000000000000194                __vector_1
+                0x0000000000000194                __vector_32
+                0x0000000000000194                __vector_34
+                0x0000000000000194                __vector_24
+                0x0000000000000194                __vector_12
+                0x0000000000000194                __vector_55
+                0x0000000000000194                __vector_46
+                0x0000000000000194                __bad_interrupt
+                0x0000000000000194                __vector_6
+                0x0000000000000194                __vector_31
+                0x0000000000000194                __vector_35
+                0x0000000000000194                __vector_39
+                0x0000000000000194                __vector_3
+                0x0000000000000194                __vector_23
+                0x0000000000000194                __vector_30
+                0x0000000000000194                __vector_45
+                0x0000000000000194                __vector_25
+                0x0000000000000194                __vector_11
+                0x0000000000000194                __vector_54
+                0x0000000000000194                __vector_13
+                0x0000000000000194                __vector_17
+                0x0000000000000194                __vector_19
+                0x0000000000000194                __vector_56
+                0x0000000000000194                __vector_7
+                0x0000000000000194                __vector_49
+                0x0000000000000194                __vector_41
+                0x0000000000000194                __vector_43
+                0x0000000000000194                __vector_27
+                0x0000000000000194                __vector_5
+                0x0000000000000194                __vector_33
+                0x0000000000000194                __vector_47
+                0x0000000000000194                __vector_52
+                0x0000000000000194                __vector_37
+                0x0000000000000194                __vector_4
+                0x0000000000000194                __vector_44
+                0x0000000000000194                __vector_51
+                0x0000000000000194                __vector_9
+                0x0000000000000194                __vector_2
+                0x0000000000000194                __vector_21
+                0x0000000000000194                __vector_15
+                0x0000000000000194                __vector_36
+                0x0000000000000194                __vector_29
+                0x0000000000000194                __vector_40
+                0x0000000000000194                __vector_8
+                0x0000000000000194                __vector_26
+                0x0000000000000194                __vector_48
+                0x0000000000000194                __vector_14
+                0x0000000000000194                __vector_53
+                0x0000000000000194                __vector_10
+                0x0000000000000194                __vector_50
+                0x0000000000000194                __vector_16
+                0x0000000000000194                __vector_18
+                0x0000000000000194                __vector_20
+                0x0000000000000194                __vector_42

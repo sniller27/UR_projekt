@@ -48,7 +48,7 @@ int main(void)
   while (1)
   {  
 	 //putscUSART0('g');
-	 putscUSART0(getchUSART0());
+	 putchUSART0(getchUSART0());
 	 //sprintf(var,"%c",getchUSART0());
 	 //sendStrXY(var,0,0);
 	 
