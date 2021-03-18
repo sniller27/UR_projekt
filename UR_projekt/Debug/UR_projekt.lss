@@ -15,7 +15,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   5 .debug_abbrev 00000ca5  00000000  00000000  000014d4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   00000405  00000000  00000000  00002179  2**0
+  6 .debug_line   00000406  00000000  00000000  00002179  2**0
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_frame  000000a4  00000000  00000000  00002580  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -156,7 +156,7 @@ Disassembly of section .text:
 Disassembly of section .text:
 
 00000194 <__bad_interrupt>:
- 194:	0c 94 00 00 	jmp	0	; 0x0 <__TEXT_REGION_ORIGIN__>
+ 194:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 Disassembly of section .text.main:
 
@@ -169,7 +169,7 @@ Disassembly of section .text.main:
    uart0_init(MYUBRRF);
  164:	87 e6       	ldi	r24, 0x67	; 103
  166:	90 e0       	ldi	r25, 0x00	; 0
- 168:	0e 94 a0 00 	call	0x140	; 0x140 <__data_load_end>
+ 168:	0e 94 a0 00 	call	0x140	; 0x140 <_etext>
    //char var[4];
    
   while (1)
@@ -184,12 +184,12 @@ Disassembly of section .text.main:
 Disassembly of section .text.uart0_init:
 
 00000140 <uart0_init>:
-	UART INITIALIZATION
 **/
 // init UART1
-extern void uart0_init(unsigned int ubrr){
+void uart0_init(unsigned int ubrr){
+	
 	// setting UCRSRn (USART Control and Status Register) (for A, B and C)
-	UCSR0A=(1<<U2X0); // Full duplex // enable full duplex aka. double speed (A register)
+	UCSR0A=(1<<U2X0); // Full duplex // enable full duplex (aka. double speed?) (A register)
  140:	22 e0       	ldi	r18, 0x02	; 2
  142:	20 93 c0 00 	sts	0x00C0, r18	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>
 	UCSR0B|=(1<<RXEN0)|(1<<TXEN0);// enable receive and transmit (B-register)
@@ -198,13 +198,17 @@ extern void uart0_init(unsigned int ubrr){
  14a:	20 81       	ld	r18, Z
  14c:	28 61       	ori	r18, 0x18	; 24
  14e:	20 83       	st	Z, r18
+	
+	// UCSZn sættes til 011. UCSZ02 er allerede 0, så derfor sættes UCSZ00 og UCSZ01.
 	UCSR0C|=(1<<UCSZ00)|(1<<UCSZ01); // set frame format (C-register) (8 bits, no parity...vidst også med 1 start bit og 1 stop bit)
  150:	e2 ec       	ldi	r30, 0xC2	; 194
  152:	f0 e0       	ldi	r31, 0x00	; 0
  154:	20 81       	ld	r18, Z
  156:	26 60       	ori	r18, 0x06	; 6
  158:	20 83       	st	Z, r18
-	// setting UBRRn (USART Baud Rate Register) s.211 (16 bits where H is 8 bit high and L is 8 bit low) (skal beregnes: se tabel i datablad)
+	
+	// setting UBRRn (USART Baud Rate Register) (16 bits where H is 8 bit high and L is 8 bit low) (skal beregnes: se tabel i datablad)
+	// datablad: s.207
 	UBRR0H =(unsigned char)(ubrr>>8); // skriver de 8 høje bit. (skiftes da der er 16 bit i alt i UBRRn)
  15a:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7c00c5>
 	UBRR0L =(unsigned char)ubrr; // skriver de 8 lave bit.
@@ -218,12 +222,12 @@ Disassembly of section .text.putchUSART0:
 	UART CHARACTERS
 **/
 // transmit one byte/character
-extern void putchUSART0(char tx){
+void putchUSART0(char tx){
 	while(!(UCSR0A & (1<<UDRE0))); // UDREn er 0 ved transmission indtil transmit buffer er tom (venter på at uart kan sende ny byte) (sker i UCSRnA registret)
  178:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>
  17c:	95 ff       	sbrs	r25, 5
  17e:	fc cf       	rjmp	.-8      	; 0x178 <putchUSART0>
-	UDR0 = tx; // skriver til UDR registret
+	UDR0 = tx; // put data into buffer and send it (skriver til UDR registret...UART I/O Data Register)
  180:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7c00c6>
  184:	08 95       	ret
 
@@ -232,13 +236,13 @@ Disassembly of section .text.getchUSART0:
 00000186 <getchUSART0>:
 }
 
-// receive one byte/character
- extern char getchUSART0(void){
+// receive one byte/character (skal ikke bruges i UR-projekt => skal ersttes af service routine)
+ char getchUSART0(void){
 	while(!(UCSR0A & (1<<RXC0))); // RXCn er 0 ved transmission indtil der er modtaget en byte/character (vente på at uart har modtaget en byte/character) (sker i UCSRnA registret)
  186:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>
  18a:	88 23       	and	r24, r24
  18c:	e4 f7       	brge	.-8      	; 0x186 <getchUSART0>
-	return UDR0; // modtager data fra UDR registret
+	return UDR0; // get received data from buffer (modtager data fra UDR registret...UART I/O Data Register)
  18e:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7c00c6>
 }
  192:	08 95       	ret

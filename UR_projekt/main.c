@@ -21,6 +21,12 @@
 #define MYUBRRF F_CPU/8/BAUD-1 // full duplex
 #define MYUBRRH F_CPU/16/BAUD-1 // half duplex
 
+// ISR(USART3_RX_vect){
+// 	data = UDR3;
+// 	flag_r=1;
+// }
+
+
 //init function
 void init(){
 //	PORTK|=0xFF;
@@ -51,6 +57,15 @@ int main(void)
 	 putchUSART0(getchUSART0());
 	 //sprintf(var,"%c",getchUSART0());
 	 //sendStrXY(var,0,0);
+	 
+	
+	 // med string	 
+	 // i main
+	 // lav string
+	 // char tidstekst[]="timer:min:sek \0";
+	 // putsUSART0(tidstekst);
+
+	 
 	 
 	 //var = getchUSART0();
 	 //_delay_ms(1000); 

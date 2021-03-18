@@ -499,11 +499,11 @@ END GROUP
  .debug_abbrev  0x0000000000000b1a       0xcb main.o
  .debug_abbrev  0x0000000000000be5       0xc0 UART/UART_MODULE.o
 
-.debug_line     0x0000000000000000      0x405
+.debug_line     0x0000000000000000      0x406
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x1fd C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/xc8/avr/lib/avr6/memx-const/crtatmega2560.o
  .debug_line    0x00000000000001fd       0xcb main.o
- .debug_line    0x00000000000002c8      0x13d UART/UART_MODULE.o
+ .debug_line    0x00000000000002c8      0x13e UART/UART_MODULE.o
 
 .debug_frame    0x0000000000000000       0xa4
  *(.debug_frame)
