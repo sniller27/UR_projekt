@@ -8,3 +8,5 @@ main.c
 
 ssd1306.c
 
+UART\UART_MODULE.c
+
