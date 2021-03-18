@@ -154,7 +154,7 @@ Disassembly of section .text:
 Disassembly of section .text:
 
 00000192 <__bad_interrupt>:
- 192:	0c 94 00 00 	jmp	0	; 0x0 <__TEXT_REGION_ORIGIN__>
+ 192:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 Disassembly of section .text.main:
 
@@ -167,7 +167,7 @@ Disassembly of section .text.main:
    uart0_init(MYUBRRF);
  164:	87 e6       	ldi	r24, 0x67	; 103
  166:	90 e0       	ldi	r25, 0x00	; 0
- 168:	0e 94 a0 00 	call	0x140	; 0x140 <__data_load_end>
+ 168:	0e 94 a0 00 	call	0x140	; 0x140 <_etext>
    //char var[4];
    
   while (1)
@@ -185,7 +185,7 @@ Disassembly of section .text.uart0_init:
 #define MYUBRRH F_CPU/16/BAUD-1 // half duplex
 
 // init UART1
-void uart0_init(unsigned int ubrr){
+extern void uart0_init(unsigned int ubrr){
 	UCSR0A=(1<<U2X0); // Full duplex // enable full duplex (A register)
  140:	22 e0       	ldi	r18, 0x02	; 2
  142:	20 93 c0 00 	sts	0x00C0, r18	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>
@@ -213,7 +213,7 @@ Disassembly of section .text.putscUSART0:
 }
 
 // transmit one byte
-void putscUSART0(char tx){
+extern void putscUSART0(char tx){
 	while(!(UCSR0A & (1<<UDRE0))); // UDREn er 0 ved transmission indtil transmit buffer er tom (venter på at uart kan sende ny byte)
  176:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>
  17a:	95 ff       	sbrs	r25, 5
@@ -228,7 +228,7 @@ Disassembly of section .text.getchUSART0:
 }
 
 // receive one byte
-char getchUSART0(void){
+ extern char getchUSART0(void){
 	while(!(UCSR0A & (1<<RXC0))); // RXCn er 0 ved transmission indtil der er modtaget en byte (vente på at uart har modtaget en byte)
  184:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>
  188:	88 23       	and	r24, r24

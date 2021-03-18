@@ -9,9 +9,9 @@
 #ifndef UART_MODULE_H_
 #define UART_MODULE_H_
 
-void uart0_init(unsigned int ubrr);
-void putscUSART0(char tx);
-char getchUSART0(void);
+extern void uart0_init(unsigned int ubrr);
+extern void putscUSART0(char tx);
+extern char getchUSART0(void);
 
 
 #endif /* UART_MODULE_H_ */
